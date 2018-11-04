@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import NavLink from "react-router-dom/es/NavLink";
 
 class Display2 extends Component {
+  
     render() {
         return (
             <div>
@@ -18,7 +20,11 @@ class Display2 extends Component {
                                 />
                                     <div className="card-body">
                                         <h5 className="card-title">{people.name}</h5>
-                                        <a href="#" className="btn btn-dark">Plus info</a>
+                                        <NavLink
+                                            exact to="/Info">
+                                            <a href="#" className="btn btn-dark">Plus info</a>
+                                        </NavLink>
+
                                     </div>
                             </div>
                         ))}
