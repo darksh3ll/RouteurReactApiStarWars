@@ -1,25 +1,50 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import axios from  "axios"
+// import DisplayScore from './DisplayScore';
+import SearchBar from "./SearchBar";
+import Display2 from "./Display2";
 
 class App extends Component {
+    state = {
+        characteres:[],
+        input:""
+    };
+
+    componentDidMount(){
+        this.FetchData()
+    }
+    lettreCapitalize = (str) => {
+        const arr = str.split(" ");
+        const arrCapitalize =  arr.map(str => str.charAt(0).toUpperCase() + str.slice(1));
+        return arrCapitalize.join(" ")
+    };
+    handleChange = (e) => {
+        let capitalize = this.lettreCapitalize(e.target.value);
+        this.setState({input:capitalize});
+    };
+
+    FetchData = async () => {
+        const data = await axios.get("https://cdn.rawgit.com/akabab/starwars-api/0.2.1/api/all.json");
+        this.setState({characteres:data.data})
+    };
+
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+            <SearchBar
+                change={this.handleChange}
+
+            />
+            <Display2
+                peoples={this.state.characteres}
+                valeur={this.state.input}
+
+            />
+           {/*<DisplayScore*/}
+               {/*peoples={this.state.characteres}*/}
+           {/*/>*/}
       </div>
     );
   }
