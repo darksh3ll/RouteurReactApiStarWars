@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import NavLink from "react-router-dom/es/NavLink";
 
 class Display2 extends Component {
-  
+
     render() {
         return (
             <div>
